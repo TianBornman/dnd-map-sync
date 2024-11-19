@@ -42,7 +42,7 @@ public class MapSegment : NetworkBehaviour
 			spriteRenderer.color = Color.Lerp(originalColor, MapManager.ClearColor, t);
 
 			// Stop lerping once the duration is reached
-			if (t >= 1f)
+			if (t >= 1f && IsServer)
 			{
 				isLerping.Value = false;
 				timer = 0;
