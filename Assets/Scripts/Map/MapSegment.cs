@@ -11,21 +11,17 @@ public class MapSegment : NetworkBehaviour
 	float timer = 0;
 	float duration = 2;
 
-	bool isServer;
-
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-
-		CustomNetworkManager.OnStart += SetServer;
 	}
 
-	private void SetServer()
+	public override void OnNetworkSpawn()
 	{
-		isServer = CustomNetworkManager.networkManager.IsServer;
-
-		if (isServer)
+		if (IsServer)
 			spriteRenderer.color = MapManager.PeekColor;
+
+		base.OnNetworkSpawn();
 	}
 
 	private void Update()
@@ -53,19 +49,19 @@ public class MapSegment : NetworkBehaviour
 
 	private void OnMouseEnter()
 	{
-		if (!isLerping.Value && isServer)
+		if (!isLerping.Value && IsServer)
 			spriteRenderer.color = MapManager.HoverColor;
 	}
 
 	private void OnMouseExit()
 	{
-		if (!isLerping.Value && isServer)
+		if (!isLerping.Value && IsServer)
 			spriteRenderer.color = MapManager.PeekColor;
 	}
 
 	private void OnMouseDown()
 	{
-		if (isServer)
+		if (IsServer)
 			isLerping.Value = true;
 	}
 }
