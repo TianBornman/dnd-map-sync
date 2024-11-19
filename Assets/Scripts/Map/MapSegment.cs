@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class MapSegment : NetworkBehaviour
 {
-	private Color originalColor;
-	public Color hoverColor;
-	public Color clearColor;
-
 	private SpriteRenderer spriteRenderer;
 
 	public NetworkVariable<bool> isLerping = new NetworkVariable<bool>(
@@ -20,7 +16,6 @@ public class MapSegment : NetworkBehaviour
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		originalColor = spriteRenderer.color;
 
 		CustomNetworkManager.OnStart += SetServer;
 	}
@@ -28,6 +23,9 @@ public class MapSegment : NetworkBehaviour
 	private void SetServer()
 	{
 		isServer = CustomNetworkManager.networkManager.IsServer;
+
+		if (isServer)
+			spriteRenderer.color = MapManager.PeekColor;
 	}
 
 	private void Update()
@@ -41,7 +39,7 @@ public class MapSegment : NetworkBehaviour
 			float t = Mathf.Clamp01(timer / duration);
 
 			// Interpolate the color and apply it to the material
-			spriteRenderer.color = Color.Lerp(hoverColor, clearColor, t);
+			spriteRenderer.color = Color.Lerp(MapManager.HoverColor, MapManager.ClearColor, t);
 
 			// Stop lerping once the duration is reached
 			if (t >= 1f)
@@ -56,13 +54,13 @@ public class MapSegment : NetworkBehaviour
 	private void OnMouseEnter()
 	{
 		if (!isLerping.Value && isServer)
-			spriteRenderer.color = hoverColor;
+			spriteRenderer.color = MapManager.HoverColor;
 	}
 
 	private void OnMouseExit()
 	{
 		if (!isLerping.Value && isServer)
-			spriteRenderer.color = originalColor;
+			spriteRenderer.color = MapManager.PeekColor;
 	}
 
 	private void OnMouseDown()
