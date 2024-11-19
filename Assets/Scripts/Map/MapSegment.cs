@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class MapSegment : NetworkBehaviour
 {
+	private Color originalColor;
+
 	private SpriteRenderer spriteRenderer;
 
 	public NetworkVariable<bool> isLerping = new NetworkVariable<bool>(
 		writePerm: NetworkVariableWritePermission.Server);
 
 	float timer = 0;
-	float duration = 2;
+	float duration = 3;
 
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
+
+		originalColor = spriteRenderer.color;
 	}
 
 	public override void OnNetworkSpawn()
@@ -35,7 +39,7 @@ public class MapSegment : NetworkBehaviour
 			float t = Mathf.Clamp01(timer / duration);
 
 			// Interpolate the color and apply it to the material
-			spriteRenderer.color = Color.Lerp(MapManager.HoverColor, MapManager.ClearColor, t);
+			spriteRenderer.color = Color.Lerp(originalColor, MapManager.ClearColor, t);
 
 			// Stop lerping once the duration is reached
 			if (t >= 1f)

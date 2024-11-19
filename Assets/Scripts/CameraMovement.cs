@@ -1,19 +1,9 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class CameraMovement : NetworkBehaviour
 {
 	float speed = 5.0f;
-
-	private void Start()
-	{
-		CustomNetworkManager.OnStart += OnStart;
-	}
-
-	private void OnStart()
-	{
-		if (CustomNetworkManager.networkManager.IsServer)
-			transform.GetChild(0).gameObject.SetActive(true);
-	}
 
 	private void Update()
 	{
@@ -31,8 +21,5 @@ public class CameraMovement : MonoBehaviour
 
 		// Apply movement (scaled by speed and deltaTime)
 		transform.Translate(movement * speed * Time.deltaTime, Space.World);
-
-		if (CustomNetworkManager.spectator)
-			CustomNetworkManager.spectator.transform.position = transform.position;
 	}
 }

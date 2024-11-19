@@ -1,13 +1,10 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class CustomNetworkManager : MonoBehaviour
 {
 	public static NetworkManager networkManager;
-	public static SpectatorCam spectator;
 
-	public static Action OnStart;
 
 	void Awake()
 	{
@@ -40,13 +37,11 @@ public class CustomNetworkManager : MonoBehaviour
 	static void StartClient()
 	{
 		networkManager.StartClient();
-		OnStart();
 	}
 
 	static void StartServer()
 	{
 		networkManager.StartServer();
-		OnStart();
 	}
 
 	static void StatusLabels()
