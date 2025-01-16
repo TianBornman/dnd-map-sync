@@ -1,0 +1,48 @@
+﻿using TMPro;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+[GenerateSerializationForType(typeof(string))]
+public class Entity : NetworkBehaviour
+{
+	public TextMeshProUGUI nameText;
+
+	#region Properties
+
+	private string entityName;
+
+	[SerializeField]
+	public string EntityName
+	{
+		get { return entityName; }
+		set 
+		{
+			entityName = value; 
+			nameText.text = entityName;
+
+			if (IsServer)
+				SetClientNameClientRpc(entityName);
+		}
+	}
+
+	#endregion
+
+	public override void OnNetworkSpawn()
+	{
+		var uiManagement = GameObject.FindGameObjectWithTag("UiManagement").GetComponent<UIDocument>();
+
+		uiManagement.rootVisualElement.Q<TextField>().dataSource = this;
+
+		base.OnNetworkSpawn();
+	}
+
+	[ClientRpc]
+	public void SetClientNameClientRpc(string name)
+	{
+		if (IsServer)
+			return;
+
+		EntityName = name;
+	}
+}

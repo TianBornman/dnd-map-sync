@@ -1,0 +1,19 @@
+.menu-button {
+    height: 100px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    font-size: 30px;
+    background-color: rgb(161, 161, 161);
+}
+
+.menu-button:hover {
+    background-color: rgb(255, 255, 255);
+    scale: 1.05 1.1;
+    transition-duration: 0.25s;
+}

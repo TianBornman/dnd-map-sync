@@ -5,7 +5,6 @@ public class CustomNetworkManager : MonoBehaviour
 {
 	public static NetworkManager networkManager;
 
-
 	void Awake()
 	{
 		networkManager = GetComponent<NetworkManager>();
