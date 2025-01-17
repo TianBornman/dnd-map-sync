@@ -7,6 +7,8 @@ public class EntityMovement : NetworkBehaviour
 	private Vector3 offset;
 
 	private Camera mainCamera;
+	private UIManager uiManagement;
+	private Entity entity;
 
 	public override void OnNetworkSpawn()
 	{
@@ -19,6 +21,8 @@ public class EntityMovement : NetworkBehaviour
 		}
 
 		mainCamera = Camera.main; // Cache the main camera for efficiency
+		uiManagement = GameObject.FindGameObjectWithTag("UiManagement").GetComponent<UIManager>();
+		entity = GetComponent<Entity>();
 	}
 
 	private void OnMouseDown()
@@ -26,6 +30,7 @@ public class EntityMovement : NetworkBehaviour
 		// Start dragging and calculate the offset between the mouse and object
 		isDragging = true;
 		offset = transform.position - GetMouseWorldPosition();
+		uiManagement.SetCurrentEntity(entity);
 	}
 
 	private void OnMouseUp()

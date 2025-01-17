@@ -1,13 +1,13 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraMovement : NetworkBehaviour
 {
-	float speed = 5.0f;
+	private float speed = 5.0f;
 
 	public NetworkVariable<float> projetionAmount = new NetworkVariable<float>(
 			5, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
 
 	private void Update()
 	{

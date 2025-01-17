@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [GenerateSerializationForType(typeof(string))]
 public class Entity : NetworkBehaviour
@@ -16,9 +15,9 @@ public class Entity : NetworkBehaviour
 	public string EntityName
 	{
 		get { return entityName; }
-		set 
+		set
 		{
-			entityName = value; 
+			entityName = value;
 			nameText.text = entityName;
 
 			if (IsServer)
@@ -27,15 +26,6 @@ public class Entity : NetworkBehaviour
 	}
 
 	#endregion
-
-	public override void OnNetworkSpawn()
-	{
-		var uiManagement = GameObject.FindGameObjectWithTag("UiManagement").GetComponent<UIDocument>();
-
-		uiManagement.rootVisualElement.Q<TextField>().dataSource = this;
-
-		base.OnNetworkSpawn();
-	}
 
 	[ClientRpc]
 	public void SetClientNameClientRpc(string name)
