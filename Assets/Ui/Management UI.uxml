@@ -4,7 +4,7 @@
         <engine:VisualElement name="Menu" style="flex-grow: 1; width: 30%; margin-left: auto; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; border-top-left-radius: 12px; border-top-right-radius: 12px; border-bottom-right-radius: 12px; border-bottom-left-radius: 12px; background-color: rgba(91, 91, 91, 0.92);">
             <engine:Button text="Spawn Entity" name="SpawnEntity" class="menu-button" />
             <engine:Button text="Toggle Manage Entity" name="ManageEntity" class="menu-button" style="white-space: normal;" />
-            <engine:VisualElement name="EntityManagement" style="flex-grow: 1;">
+            <engine:VisualElement name="EntityManagement" class="hidden" style="flex-grow: 1;">
                 <engine:TextField label="Name:" placeholder-text="Enter Name" name="EntityName">
                     <Bindings>
                         <engine:DataBinding property="value" data-source-path="EntityName" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />

@@ -24,7 +24,7 @@ public class UIManager : NetworkBehaviour
 
 		uiManagement = GetComponent<UIDocument>();
 
-		uiManagement.rootVisualElement.Q<Button>("SpawnEntity").clicked += entityManager.SpawnObject;
+		uiManagement.rootVisualElement.Q<Button>("SpawnEntity").clicked += entityManager.PlaceObject;
 		uiManagement.rootVisualElement.Q<Button>("ManageEntity").clicked += ToggleManageEntity;
 
 		uiManagement.rootVisualElement.Q<VisualElement>("Menu").RegisterCallback<PointerEnterEvent>(evt => IsOverUi = true);
