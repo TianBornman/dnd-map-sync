@@ -65,7 +65,7 @@ public class MapSegment : NetworkBehaviour
 
 	private void OnMouseDown()
 	{
-		if (IsServer)
+		if (IsServer && !UIManager.Instance.IsOverUi)
 			isLerping.Value = true;
 	}
 }

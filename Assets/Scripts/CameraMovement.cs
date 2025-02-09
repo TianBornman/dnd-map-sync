@@ -1,6 +1,5 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CameraMovement : NetworkBehaviour
 {
@@ -11,7 +10,7 @@ public class CameraMovement : NetworkBehaviour
 
 	private void Update()
 	{
-		if (CustomNetworkManager.networkManager.IsServer)
+		if (CustomNetworkManager.networkManager.IsServer && !UIManager.Instance.IsOverUi)
 			Move();
 
 		Camera.main.orthographicSize = projetionAmount.Value;
