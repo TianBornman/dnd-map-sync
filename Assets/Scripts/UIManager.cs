@@ -38,6 +38,10 @@ public class UIManager : NetworkBehaviour
 	{
 		uiManagement.rootVisualElement.Q<TextField>().dataSource = entity;
 		uiManagement.rootVisualElement.Q<FloatField>().dataSource = entity;
+
+		uiManagement.rootVisualElement.Q<IntegerField>("R").dataSource = entity;
+		uiManagement.rootVisualElement.Q<IntegerField>("G").dataSource = entity;
+		uiManagement.rootVisualElement.Q<IntegerField>("B").dataSource = entity;
 	}
 
 	public void ToggleManageEntity()

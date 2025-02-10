@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 2111455997630116965}
+  spriteRenderer: {fileID: 6151485781142736519}
 --- !u!114 &797160983075393039
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,21 @@
                         <engine:DataBinding property="value" data-source-path="EntitySize" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />
                     </Bindings>
                 </engine:FloatField>
+                <engine:IntegerField label="R:" value="0" name="R">
+                    <Bindings>
+                        <engine:DataBinding property="value" data-source-path="R" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />
+                    </Bindings>
+                </engine:IntegerField>
+                <engine:IntegerField label="G:" value="0" name="G">
+                    <Bindings>
+                        <engine:DataBinding property="value" data-source-path="G" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />
+                    </Bindings>
+                </engine:IntegerField>
+                <engine:IntegerField label="B:" value="0" name="B">
+                    <Bindings>
+                        <engine:DataBinding property="value" data-source-path="B" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />
+                    </Bindings>
+                </engine:IntegerField>
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

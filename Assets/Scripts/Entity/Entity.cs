@@ -5,60 +5,147 @@ using UnityEngine;
 [GenerateSerializationForType(typeof(string))]
 public class Entity : NetworkBehaviour
 {
-	public TextMeshProUGUI nameText;
+    public TextMeshProUGUI nameText;
+    public SpriteRenderer spriteRenderer;
 
-	#region Properties
+    #region Properties
 
-	private string entityName;
+    private string entityName;
 
-	[SerializeField]
-	public string EntityName
-	{
-		get { return entityName; }
-		set
-		{
-			entityName = value;
-			nameText.text = entityName;
+    [SerializeField]
+    public string EntityName
+    {
+        get { return entityName; }
+        set
+        {
 
-			if (IsServer)
-				SetClientNameClientRpc(entityName);
-		}
-	}
+            entityName = value;
+            nameText.text = entityName;
 
-	private float entitySize = 1;
+            if (IsServer)
+                SetClientNameClientRpc(entityName);
+        }
+    }
 
-	[SerializeField]
-	public float EntitySize
-	{
-		get { return entitySize; }
-		set
-		{
-			entitySize = value;
+    private float entitySize = 1;
 
-			transform.localScale = new Vector3(entitySize, entitySize, entitySize);
+    [SerializeField]
+    public float EntitySize
+    {
+        get { return entitySize; }
+        set
+        {
+            entitySize = value;
 
-			if (IsServer)
-				SetClientSizeClientRpc(entitySize);
-		}
-	}
+            transform.localScale = new Vector3(entitySize, entitySize, entitySize);
 
-	#endregion
+            if (IsServer)
+                SetClientSizeClientRpc(entitySize);
+        }
+    }
 
-	[ClientRpc]
-	public void SetClientNameClientRpc(string name)
-	{
-		if (IsServer)
-			return;
+    private int r = 0;
 
-		EntityName = name;
-	}	
-	
-	[ClientRpc]
-	public void SetClientSizeClientRpc(float size)
-	{
-		if (IsServer)
-			return;
+    [SerializeField]
+    public int R
+    {
+        get { return r; }
+        set
+        {
+            r = value;
 
-		EntitySize = size;
-	}
+            spriteRenderer.color = GetColor();
+
+            if (IsServer)
+                SetClientRClientRpc(r);
+        }
+    }
+
+    private int g = 0;
+
+    [SerializeField]
+    public int G
+    {
+        get { return g; }
+        set
+        {
+            g = value;
+
+            spriteRenderer.color = GetColor();
+
+            if (IsServer)
+                SetClientGClientRpc(b);
+        }
+    }
+
+    private int b = 0;
+
+    [SerializeField]
+    public int B
+    {
+        get { return b; }
+        set
+        {
+            b = value;
+
+            spriteRenderer.color = GetColor();
+
+            if (IsServer)
+                SetClientBClientRpc(b);
+        }
+    }
+
+    #endregion
+
+    [ClientRpc]
+    public void SetClientNameClientRpc(string name)
+    {
+        if (IsServer)
+            return;
+
+        EntityName = name;
+    }
+
+    [ClientRpc]
+    public void SetClientSizeClientRpc(float size)
+    {
+        if (IsServer)
+            return;
+
+        EntitySize = size;
+    }
+
+    [ClientRpc]
+    public void SetClientRClientRpc(int r)
+    {
+        if (IsServer)
+            return;
+
+        R = r;
+    }
+
+    [ClientRpc]
+    public void SetClientGClientRpc(int g)
+    {
+        if (IsServer)
+            return;
+
+        G = g;
+    }
+
+    [ClientRpc]
+    public void SetClientBClientRpc(int b)
+    {
+        if (IsServer)
+            return;
+
+        B = b;
+    }
+
+    private Color GetColor()
+    {
+        return new Color(r > 0 ? r / 255f : 0, 
+                         g > 0 ? g / 255f : 0, 
+                         b > 0 ? b / 255f : 0);
+    }
 }
