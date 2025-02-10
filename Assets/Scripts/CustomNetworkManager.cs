@@ -8,7 +8,7 @@ public class CustomNetworkManager : MonoBehaviour
 	void Awake()
 	{
 		networkManager = GetComponent<NetworkManager>();
-		Screen.SetResolution(960, 540, FullScreenMode.Windowed);
+		//Screen.SetResolution(960, 540, FullScreenMode.Windowed);
 	}
 
 	void OnGUI()

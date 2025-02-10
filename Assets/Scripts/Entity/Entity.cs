@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [GenerateSerializationForType(typeof(string))]
 public class Entity : NetworkBehaviour
@@ -142,10 +143,23 @@ public class Entity : NetworkBehaviour
         B = b;
     }
 
+    public void Destroy()
+    {
+        if (IsServer)
+            Destroy(gameObject);
+    }
+
     private Color GetColor()
     {
         return new Color(r > 0 ? r / 255f : 0, 
                          g > 0 ? g / 255f : 0, 
                          b > 0 ? b / 255f : 0);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        UIManager.Instance.uiManagement.rootVisualElement.Q<Button>("EntityDestroy").clicked -= Destroy;
+
+        base.OnNetworkDespawn();
     }
 }

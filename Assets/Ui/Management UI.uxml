@@ -30,6 +30,7 @@
                         <engine:DataBinding property="value" data-source-path="B" data-source-type="Entity, Assembly-CSharp" binding-mode="TwoWay" />
                     </Bindings>
                 </engine:IntegerField>
+                <engine:Button text="Destroy Entity" name="EntityDestroy" class="menu-button" style="white-space: normal;" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

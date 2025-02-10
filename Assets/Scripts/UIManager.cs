@@ -8,7 +8,7 @@ public class UIManager : NetworkBehaviour
 	public EntityManager entityManager;
 	public bool IsOverUi;
 
-	private UIDocument uiManagement;
+	public UIDocument uiManagement;
 
 	private bool showManageEntity = false;
 
@@ -42,6 +42,8 @@ public class UIManager : NetworkBehaviour
 		uiManagement.rootVisualElement.Q<IntegerField>("R").dataSource = entity;
 		uiManagement.rootVisualElement.Q<IntegerField>("G").dataSource = entity;
 		uiManagement.rootVisualElement.Q<IntegerField>("B").dataSource = entity;
+
+		uiManagement.rootVisualElement.Q<Button>("EntityDestroy").clicked += entity.Destroy;
 	}
 
 	public void ToggleManageEntity()
